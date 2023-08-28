@@ -22,9 +22,8 @@ export const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 
 const products = await crud().read('products');
-console.log('antes do update:', products[0])
+console.log('first product: ', products[0])
 
-// const updateProduct = await crud().update('products');
-// console.log('depois do update:', products)
+const updateProduct = await crud().update('products', products[0].id);
 
-await crud().remove('products', 'OzLm9LpozujLs8uQyiv2')
+await crud().remove('products', products[1].id)
