@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { crud } from "./crud.js";
+import { crud, StoreManagment } from "./crud.js";
 // import { getAnalytics } from "firebase/analytics";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -21,9 +21,17 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 
-const products = await crud().read('products');
-console.log('first product: ', products[0])
+// const products = await crud().read('products');
+// console.log('first product: ', products[0])
 
-const updateProduct = await crud().update('products', products[0].id);
+// const updateProduct = await crud().update('products', products[0].id);
 
-await crud().remove('products', products[1].id)
+// await crud().remove('products', products[1].id)
+
+const crud2 = new StoreManagment()
+
+crud2.Post({
+  productName: 'sunglasses', 
+  value: 499.90, 
+  isAvailable: true
+})

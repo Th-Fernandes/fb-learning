@@ -48,12 +48,28 @@ export function crud() {
   }
 }
 
-export class crud2 {
-  #db = getFirestore(app);
+export class StoreManagment {
+  async Post({productName, value, isAvailable}) {
+    const t = new Post().onCollection('products')
+    t.publishDocument({
+      productName, 
+      value, 
+      isAvailable
+    }) 
+  }
+}
 
-   async create({collectionName, productName, value, isAvailable }) {
+class Post {
+  #db = getFirestore(app);
+  #collection = '';
+
+  onCollection(collection) {
+    this.#collection = collection
+  }
+
+  async publishDocument({productName, value, isAvailable}) {
     try {
-      const docRef = await addDoc(collection(this.#db, collectionName), {
+      const docRef = await addDoc(collection(this.#db, this.#collection), {
         productName,
         value,
         isAvailable
@@ -63,4 +79,5 @@ export class crud2 {
       console.error("Error adding document: ", e);
     }
   }
+
 }
