@@ -1,27 +1,48 @@
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, UserCredential } from "firebase/auth";
 import { provider } from "./auth_create";
 
-export async function googleSignIn() {
+export function googleAuth() {
   const auth = getAuth();
-  return signInWithPopup(auth, provider)
+  let authError:any = {};
+
+  async function SignIn() {
+    return signInWithPopup(auth, provider)
     .then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential?.accessToken;
-      // The signed-in user info.
-      const user = result.user;
-      
-      return user
-      // IdP data available using getAdditionalUserInfo(result)
-      // ...
+      const token = getAccessToken(result); // give access to google API
+      return result.user // The signed-in user info.
     }).catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.customData.email;
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error);
-      // ...
+      authError = error;
+      const { errorCode, errorMessage } = getSignInErrors() 
+      const { email, credential } = getUsedCredentials();
     });
+  }
+
+  function getAccessToken(userCredential: UserCredential) {
+    const credential = GoogleAuthProvider.credentialFromResult(userCredential);
+    const token = credential?.accessToken;
+    return token;
+  }
+
+  function getSignInErrors() {
+    return {
+      errorCode: authError.code,
+      errorMessage: authError.message
+    }
+  }
+
+  function getUsedCredentials() {
+    return {
+      email: authError.customData.email, // The email of the user's account used.
+      credential: GoogleAuthProvider.credentialFromError(authError) //The AuthCredential type that was used.
+    }     
+  }
+
+  async function SignOut() {
+    await signOut(auth);
+  }
+
+  return {
+    SignIn,
+    SignOut
+  }
 }
