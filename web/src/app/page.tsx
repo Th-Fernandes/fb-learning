@@ -1,9 +1,8 @@
 'use client';
 
 import { useGetProducts } from "@/hooks/useGetProducts";
-import { provider } from "@/utils/auth/google/auth_create";
 import { googleAuth } from "@/utils/auth/google/signin_popup";
-import { getAuth, signInWithRedirect, signInWithPopup, User } from "firebase/auth";
+import { User } from "firebase/auth";
 import "firebaseui/dist/firebaseui.css";
 import Image from "next/image";
 import React from "react";
@@ -19,7 +18,7 @@ export default function Home() {
   }
 
   async function handleSignOut() {
-    const signOut = await googleAuth().SignOut()
+    await googleAuth().SignOut()
     setLoggedInUser(null)
   }
 

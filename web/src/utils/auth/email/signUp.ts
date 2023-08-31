@@ -7,7 +7,6 @@ interface UserCredentials {
 }
 
 export function Auth() {
-
   async function signUp({email, password}:UserCredentials) {
     return createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -17,7 +16,6 @@ export function Auth() {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(`[${errorCode}]: ${errorMessage}`)
-        // ..
       });
   }
 
@@ -27,11 +25,11 @@ export function Auth() {
   }
 
   async function signOut() {
-  firebaseSignOut(auth).then(() => {
-    console.log('user was successfully signed out')
-  }).catch((error) => {
-    // An error happened.
-  });
+    firebaseSignOut(auth).then(() => {
+      console.log('user was successfully signed out')
+    }).catch((error) => {
+      // An error happened.
+    });
   }
 
   function getSignedInUser(setState:React.SetStateAction<any>) {

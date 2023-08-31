@@ -14,7 +14,7 @@ export default function AuthPage() {
   React.useEffect(() => {
     const setSignedInUserOnState = (user: User) => setSignedInUser(user)
     Auth().getSignedInUser(setSignedInUserOnState)
-  })
+  }, [])
 
   const [userCredentials, setUserCredentials ] = React.useState<UserInput>({
     email: '',
