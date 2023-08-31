@@ -29,8 +29,6 @@ export default function AuthPage() {
         [property]: value
       }
     })
-
-    
   }
 
   async function handleSignUp(){
