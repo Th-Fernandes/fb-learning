@@ -30,11 +30,14 @@ export function useRealTime() {
   */
   function observeDbChanges() {
     const itemsRef = ref(realtimeDb, 'products/');
-
-    onValue(itemsRef, snapshot => {
-      const items = getItemsFromSnapshot(snapshot)
-      setItems(items)
-    });
+    setObserver();
+    
+    function setObserver() {
+      onValue(itemsRef, snapshot => {
+        const items = getItemsFromSnapshot(snapshot)
+        setItems(items)
+      });
+    }
 
     function getItemsFromSnapshot(snapshot: DataSnapshot) {
       const items:[string, Product][] = Object.entries(snapshot.val());

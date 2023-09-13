@@ -17,12 +17,15 @@ export function useGetProducts() {
   React.useEffect(() => {
     async function getProducts() {
       const querySnapshot = await getDocs(collection(db, 'products'));
+
       const items = querySnapshot.docs.map(docs => {
+        const { value, isAvailable, productName } = docs.data()
+
         const products: Product = {
           id: docs.id,
-          value: docs.data().value,
-          isAvailable: docs.data().isAvailable,
-          productName: docs.data().productName
+          value,
+          isAvailable,
+          productName
         } 
         return products
       })
