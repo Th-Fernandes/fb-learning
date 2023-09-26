@@ -10,7 +10,7 @@ export default async function Layout({
   children,
 }: {
   children: React.ReactNode,
-  params: { id: string}
+  params: { id: string }
 }) {
   console.log('test: ', id)
 

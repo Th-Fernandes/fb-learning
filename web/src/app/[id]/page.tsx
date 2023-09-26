@@ -1,5 +1,6 @@
 import { db } from "@/lib/firebase";
 import { collection, getDocs } from "firebase/firestore";
+import Image from "next/image";
 
 const getItem = async () => {
   const querySnapshot = await getDocs(collection(db, 'products'));
@@ -16,7 +17,7 @@ const getItem = async () => {
 
 export default async function ProductsPage() {
   const products = await getItem();
-  console.log(products)
+  // console.log(products)
   
   return (
       <ul>
