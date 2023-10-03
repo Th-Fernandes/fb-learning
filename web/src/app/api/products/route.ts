@@ -1,6 +1,16 @@
 import { db } from "@/lib/firebase";
-import {addDoc, collection } from "firebase/firestore";
+import {addDoc, collection, getDocs } from "firebase/firestore";
 import { NextRequest, NextResponse } from "next/server";
+
+export async function GET() {
+  const ref = collection(db, "products");
+  const querySnapshot = await getDocs(ref);
+  const items = querySnapshot.docs.map(docs => {
+    return { id: docs.id, ...docs.data() }
+  })
+
+  return NextResponse.json(items);
+}
 
 export async function POST(req: NextRequest) {
   const product = await req.json();
