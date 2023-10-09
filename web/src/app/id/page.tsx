@@ -1,5 +1,6 @@
 import { db } from "@/lib/firebase";
 import { collection, getDocs } from "firebase/firestore";
+import Image from "next/image";
 import { cache } from "react";
 
 interface Product {
@@ -40,7 +41,13 @@ export default async function ProductsPage() {
         products && products.map(({productName, value }: Product) => (
           <li key={productName} className="border-b-2 p-1 border-b-orange-600 flex flex-col gap-2">
             <span>name: {productName}</span> 
-            <span>price: {value} </span>            
+            <span>price: {value} </span>  
+            <Image
+              src="https://media.sketchfab.com/models/6443cf39cf2e464b9dd28394701805eb/thumbnails/ff76a505bdf040a783a1da47f7e8b189/d03da660b3964b3e800a492d9e4a5065.jpeg"  
+              alt=""
+              width={1920}
+              height={1080}
+            />          
           </li>
         ))
       }

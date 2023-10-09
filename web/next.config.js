@@ -9,11 +9,11 @@ const nextConfig = {
         pathname: '/a/**'
       },
 
-      // {
-      //   protocol: 'https',
-      //   hostname: 'media.sketchfab.com',
-      //   pathname: '/**/**/**/**/**'
-      // }
+      {
+        protocol: 'https',
+        hostname: 'media.sketchfab.com',
+        pathname: '/**/**/**/**/**'
+      }
     ]
   }
 }
