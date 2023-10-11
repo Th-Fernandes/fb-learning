@@ -1,17 +1,13 @@
-export default function RootLayout({
-  children,
-  clientDashBoard,
-  adminDashBoard
-}: {
+export default function Layout(props : {
   children: React.ReactNode,
   clientDashBoard: React.ReactNode,
   adminDashBoard: React.ReactNode
 }) {
+  const { children, adminDashBoard, clientDashBoard } = props;
+  
   const isUserAdmin = () => {
     return true;
   }
-  console.log(adminDashBoard)
-
 
   return (
     <html lang="en">
