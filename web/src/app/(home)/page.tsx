@@ -39,7 +39,6 @@ export default function Home() {
                 width={64}
                 height={64}
               />
-
               <div>
               {loggedInUser && loggedInUser.displayName}
             </div>
