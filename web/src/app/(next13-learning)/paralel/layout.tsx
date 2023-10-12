@@ -5,19 +5,12 @@ export default function Layout(props : {
 }) {
   const { children, adminDashBoard, clientDashBoard } = props;
   
-  const isUserAdmin = () => {
-    return true;
-  }
-
   return (
     <html lang="en">
       <body>
         {children}
-        {
-          isUserAdmin() 
-            ? adminDashBoard
-            : clientDashBoard
-        }
+        {/* {adminDashBoard} */}
+        {/* {clientDashBoard} */}
       </body>
     </html>
   )

@@ -4,7 +4,7 @@ import React from "react"
 
 export default function AdminDashBoard() {
   const [isOpen, setIsOpen] = React.useState<boolean>(true)
-
+  
   return (
     <dialog 
       open={isOpen} 
@@ -15,6 +15,5 @@ export default function AdminDashBoard() {
       <p>just giving it a try</p>
 
     </dialog>
-
   )
 }
