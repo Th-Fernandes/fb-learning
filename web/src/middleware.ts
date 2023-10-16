@@ -3,14 +3,12 @@ import type { NextRequest } from 'next/server'
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
-  
-  const isRequestMadeByClient = !req.headers.get("referer")?.includes('http://localhost:3000')
+  const isRequestMadeByClient = !req.headers.get("referer")?.includes('http://localhost:3000');
 
   if (pathname.startsWith(`/api/`) && isRequestMadeByClient) 
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
 
-  return NextResponse.next()
-
+  return NextResponse.next();
 }
 
 export const config = {
